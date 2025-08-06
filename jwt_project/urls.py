@@ -16,14 +16,16 @@ def root_redirect(request):
     return redirect('/api/docs/swagger/')
 
 urlpatterns = [
-    path('', root_redirect),  # Redirect '/' to Swagger docs
+    path('', root_redirect), 
+
+    # Admin Panel
     path('admin/', admin.site.urls),
 
-    # JWT Authentication endpoints
+    # JWT Auth Endpoints
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    # API schema and documentation
+    # Schema & API Documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
