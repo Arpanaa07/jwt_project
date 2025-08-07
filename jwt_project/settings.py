@@ -141,4 +141,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'noreply@example.com'
+DEFAULT_FROM_EMAIL = 'noreply@arpana.com'
+EMAIL_PORT = 465# Your SMTP server port (usually 587 for TLS)
+EMAIL_USE_TLS = False  # Use TLS encryption for secure communication with SMTP server
+EMAIL_USE_SSL = True
+EMAIL_HOST_PASSWORD = 'Jq]Fc.;_~K,Y'  # Your email password or app password if enabled
