@@ -7,7 +7,7 @@ from django.conf import settings
 def send_reset_email(email, reset_link):
     subject = 'Password Reset Request'
     message = f'Click the link below to reset your password:\n{reset_link}'
-    send_mail(subject, message, 'noreply@yourdomain.com', [email])
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 
 class TokenGenerator(PasswordResetTokenGenerator):
     def _make_hash_value(self, user, timestamp):
