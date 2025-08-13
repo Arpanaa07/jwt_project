@@ -29,26 +29,26 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(write_only=True)
     password = serializers.CharField(write_only=True)
 
-def validate(self, attrs):
-    email = attrs.get('email')
-    password = attrs.get('password')
-    
-    users = User.objects.filter(email=email)
-    if not users.exists():
-        raise serializers.ValidationError("No user with this email.")
-    
-    user = users.first()
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+        
+        users = User.objects.filter(email=email)
+        if not users.exists():
+            raise serializers.ValidationError("No user with this email.")
+        
+        user = users.first()
 
-    print(f"Email entered: {email}")
-    print(f"Password entered: {password}")
-    print(f"User password hash: {user.password}")
-    print(f"Password check result: {user.check_password(password)}")
+        print(f"Email entered: {email}")
+        print(f"Password entered: {password}")
+        print(f"User password hash: {user.password}")
+        print(f"Password check result: {user.check_password(password)}")
 
-    if not user.check_password(password):
-        raise serializers.ValidationError("Incorrect password.")
+        if not user.check_password(password):
+            raise serializers.ValidationError("Incorrect password.")
 
-    attrs['user'] = user
-    return attrs
+        attrs['user'] = user
+        return attrs
 
 
 class ForgotPasswordSerializer(serializers.Serializer):
