@@ -11,7 +11,10 @@ from django.utils.encoding import force_bytes
 from drf_spectacular.utils import extend_schema
 from .utils import send_reset_email
 from .serializers import ForgotPasswordSerializer
-
+from rest_framework import viewsets
+from .models import Product, Category, Supplier
+from .serializers import ProductSerializer, CategorySerializer, SupplierSerializer
+from .permissions import IsAdminOrReadOnly
 from .serializers import (
     RegisterSerializer,
     LoginSerializer,
@@ -104,3 +107,20 @@ class UserProfileAPIView(RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+class SupplierViewSet(viewsets.ModelViewSet):
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAdminOrReadOnly]

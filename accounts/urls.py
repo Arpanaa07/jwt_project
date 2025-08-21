@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from accounts.views import (
     RegisterView,
     LoginView,
@@ -6,6 +6,17 @@ from accounts.views import (
     ForgotPasswordView,
     ResetPasswordView
 )
+from rest_framework.routers import DefaultRouter
+from .views import ProductViewSet, CategoryViewSet, SupplierViewSet
+
+router = DefaultRouter()
+router.register(r'products', ProductViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'suppliers', SupplierViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
