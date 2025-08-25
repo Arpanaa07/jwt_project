@@ -19,8 +19,7 @@ urlpatterns = [
     path('', root_redirect), 
 
     # Admin Panel
-    path('admin/', admin.site.urls),
-    path('api/', include('products.urls')),  
+    path('admin/', admin.site.urls), 
 
     # JWT Auth Endpoints
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

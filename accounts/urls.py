@@ -15,10 +15,7 @@ router.register(r'categories', CategoryViewSet)
 router.register(r'suppliers', SupplierViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
-]
-
-urlpatterns = [
+    path('', include(router.urls)),  # <-- keep router urls
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot-password'),
